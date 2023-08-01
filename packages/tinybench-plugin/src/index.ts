@@ -81,10 +81,10 @@ export function withCodSpeed(bench: Bench): Bench {
       // print results
       console.log(`    ✔ Measured ${uri}`);
     }
+    teardownCore();
     console.log(`[CodSpeed] Done running ${bench.tasks.length} benches.`);
     return bench.tasks;
   };
-  teardownCore();
   return bench;
 }
 
