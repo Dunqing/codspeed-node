@@ -1,0 +1,9 @@
+tasks:
+  bench:
+    command: pnpm vitest bench
+    inputs:
+      - "benches/**"
+    local: true
+    platform: "system"
+    options:
+      cache: false
