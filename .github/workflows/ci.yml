@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - "main"
-  pull_request:
+  # TODO: remove once PR is complete
+  # pull_request:
   workflow_dispatch:
 
 jobs:
