@@ -1,5 +1,7 @@
 import { writeFileSync } from "fs";
 
+const CUSTOM_INTROSPECTION_EXIT_CODE = 213;
+
 const getV8Flags = (nodeVersionMajor: number) => {
   const flags = [
     "--hash-seed=1",
@@ -29,6 +31,6 @@ export const tryIntrospect = () => {
       process.env.__CODSPEED_NODE_CORE_INTROSPECTION_PATH__,
       JSON.stringify(introspectionMetadata)
     );
-    process.exit(0);
+    process.exit(CUSTOM_INTROSPECTION_EXIT_CODE);
   }
 };
