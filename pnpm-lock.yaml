@@ -304,8 +304,8 @@ importers:
         version: link:../core
     devDependencies:
       vitest:
-        specifier: 1.0.0-beta.0
-        version: 1.0.0-beta.0(@types/node@18.15.11)
+        specifier: 1.0.0-beta.2
+        version: 1.0.0-beta.2(@types/node@18.15.11)
 
 packages:
 
@@ -3634,38 +3634,38 @@ packages:
       eslint-visitor-keys: 3.4.0
     dev: true
 
-  /@vitest/expect@1.0.0-beta.0:
-    resolution: {integrity: sha512-1NgozGzQNb/gv5+Bh5j3J9DFXzAV+geDo0KXOiaWIG/DRXJYH1fCcw3veoyL/d5zK+KqV0HRIM3rVQEuIq/1Qg==}
+  /@vitest/expect@1.0.0-beta.2:
+    resolution: {integrity: sha512-u3CoUMNn+0SxGzqLC4hdbyoCACduaBmM2AcGWpqdweM7CS8PxfDhbbuhClLmLg7OOd1RjFAGO09x5iWQjX+Rmw==}
     dependencies:
-      '@vitest/spy': 1.0.0-beta.0
-      '@vitest/utils': 1.0.0-beta.0
+      '@vitest/spy': 1.0.0-beta.2
+      '@vitest/utils': 1.0.0-beta.2
       chai: 4.3.10
     dev: true
 
-  /@vitest/runner@1.0.0-beta.0:
-    resolution: {integrity: sha512-ZoXTqEWEAcxuNRfGzZGbEXg1nZbtKhRcftdnQ0cajNF2Nt7b5XKHUusCIMuejAePpTZihQNwIKyqe1hzwiju5Q==}
+  /@vitest/runner@1.0.0-beta.2:
+    resolution: {integrity: sha512-+W59xEwQg8re9kQOitAYgjjO6LBkPgyUIhCryEslfxwFYJZC3+4CPIJI/8Wac53cUR0NcXzraF8mplE5JYIptQ==}
     dependencies:
-      '@vitest/utils': 1.0.0-beta.0
+      '@vitest/utils': 1.0.0-beta.2
       p-limit: 4.0.0
       pathe: 1.1.1
     dev: true
 
-  /@vitest/snapshot@1.0.0-beta.0:
-    resolution: {integrity: sha512-yjBZZ+DHpqdkZpQ0LDYUCSSTlF293HsTKKLkLAIqmn0Y4XdVV7qgVEebDA612sqsZ+c9lJZ5JP6n/YkWwlGaPQ==}
+  /@vitest/snapshot@1.0.0-beta.2:
+    resolution: {integrity: sha512-ldL0EnnFr8Pkh7j+sY6ffWXN6UlQCEmMxvxaq/REgf7SKy09L2aJtqnTH3PvcCt98JqOESrd1UpcCRvQml5gVw==}
     dependencies:
       magic-string: 0.30.4
       pathe: 1.1.1
       pretty-format: 29.5.0
     dev: true
 
-  /@vitest/spy@1.0.0-beta.0:
-    resolution: {integrity: sha512-TpfQDtetSvFkzrJYMoNG55ip3Q/UfTxlJQ0Ue47Pom0of++6SJJw2WgXbIIPg6vM6yY0pH89+vmhUWTTVJnJrQ==}
+  /@vitest/spy@1.0.0-beta.2:
+    resolution: {integrity: sha512-mamPkcuSa2RtOfZnYOayLT8UAOd9/ok3TFKzGemir2rUYK0abjKGjMhKx9A6MXGHI7yeyrHbAdK3p9BeP6lS7g==}
     dependencies:
       tinyspy: 2.2.0
     dev: true
 
-  /@vitest/utils@1.0.0-beta.0:
-    resolution: {integrity: sha512-6mREW4SAEN0QPn4bQT2simhBMM5a0/WaGXADtKPz/UV3sUojp3OK0qbgTHaJOK5wYD6jTY7YH9lNIbE2BWEiGQ==}
+  /@vitest/utils@1.0.0-beta.2:
+    resolution: {integrity: sha512-l5SWv83I91FYcJ9/dWLDmhacvl0LSVn4ATM9OcJNVxbx/P8YaTPPY93MI6OWLazTOdbFPOIDno+c9qIvxBTZ+Q==}
     dependencies:
       diff-sequences: 29.4.3
       loupe: 2.3.6
@@ -9918,8 +9918,8 @@ packages:
       builtins: 5.0.1
     dev: true
 
-  /vite-node@1.0.0-beta.0(@types/node@18.15.11):
-    resolution: {integrity: sha512-5oUfJFXqDoZ6Y1ZJ9RYJyBACqfMT0aPfaIB1UwO0KFIR/5ijhcDlejfp4nR7j8lw1IOFu9ZttdEfPsQx0m0vOw==}
+  /vite-node@1.0.0-beta.2(@types/node@18.15.11):
+    resolution: {integrity: sha512-UMkLLjX8HYsSyTKWVVF4AMBtRpp1UmEB5fxJSWzUlNYoCAbmIB24nd/VAG5ZwZQXS8HpBDHdU6XihreXIu1FXA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
     dependencies:
@@ -9976,8 +9976,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@1.0.0-beta.0(@types/node@18.15.11):
-    resolution: {integrity: sha512-CLHJ55qNQh8hCBgAHcI8aRxxD0tAE6u0rWOyIBwS3VpqVRB8vf/RAMYi3IngisQIDOdYynelBBxl3Zgohc3oTQ==}
+  /vitest@1.0.0-beta.2(@types/node@18.15.11):
+    resolution: {integrity: sha512-jWQGjTETEz1OF7TST3iUOPL+Te1IgVfrSvFr+bu5pYIhcmSOmFUnQZ91ffOy7MUqlgaxHehAOhmaCtjde0u5CQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
     peerDependencies:
@@ -10011,11 +10011,11 @@ packages:
         optional: true
     dependencies:
       '@types/node': 18.15.11
-      '@vitest/expect': 1.0.0-beta.0
-      '@vitest/runner': 1.0.0-beta.0
-      '@vitest/snapshot': 1.0.0-beta.0
-      '@vitest/spy': 1.0.0-beta.0
-      '@vitest/utils': 1.0.0-beta.0
+      '@vitest/expect': 1.0.0-beta.2
+      '@vitest/runner': 1.0.0-beta.2
+      '@vitest/snapshot': 1.0.0-beta.2
+      '@vitest/spy': 1.0.0-beta.2
+      '@vitest/utils': 1.0.0-beta.2
       acorn: 8.10.0
       acorn-walk: 8.2.0
       cac: 6.7.14
@@ -10030,7 +10030,7 @@ packages:
       tinybench: 2.5.0
       tinypool: 0.8.1
       vite: 4.4.9(@types/node@18.15.11)
-      vite-node: 1.0.0-beta.0(@types/node@18.15.11)
+      vite-node: 1.0.0-beta.2(@types/node@18.15.11)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

@@ -21,12 +21,12 @@
     "bench": "vitest bench"
   },
   "devDependencies": {
-    "vitest": "1.0.0-beta.0"
+    "vitest": "1.0.0-beta.2"
   },
   "dependencies": {
     "@codspeed/core": "workspace:^2.2.0"
   },
   "peerDependencies": {
-    "vitest": "^1.0.0-beta.0"
+    "vitest": "^1.0.0-beta.2"
   }
 }
