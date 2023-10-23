@@ -58,29 +58,16 @@ async function runBenchmarkSuite(
 }
 
 class CodSpeedRunner extends NodeBenchmarkRunner {
-  /**
-   * Called before running all tests in collected paths.
-   */
-  onBeforeRun() {
+  async runSuite(suite: Suite): Promise<void> {
     // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
     console.log(
       `[CodSpeed] running with @codspeed/vitest-runner v${__VERSION__}`
     );
+
     setupCore();
-  }
-
-  async runSuite(suite: Suite): Promise<void> {
-    // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
-    console.log("Running suite", suite.name);
-
     await runBenchmarkSuite(suite, this);
-  }
-
-  /**
-   * Called right after running all tests in collected paths.
-   */
-  onAfterRun() {
     teardownCore();
+
     // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
     console.log(`[CodSpeed] Done running benches.`);
   }
