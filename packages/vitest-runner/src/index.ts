@@ -64,8 +64,10 @@ class CodSpeedRunner extends NodeBenchmarkRunner {
       `[CodSpeed] running with @codspeed/vitest-runner v${__VERSION__}`
     );
 
+    // TODO move in module scope, or try to find a lifecycle that actually works with bench
     setupCore();
     await runBenchmarkSuite(suite, this);
+    // TODO move in module scope, or try to find a lifecycle that actually works with bench
     teardownCore();
 
     // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
