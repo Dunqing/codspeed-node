@@ -1,9 +1,23 @@
-import { Measurement, setupCore, teardownCore } from "@codspeed/core";
+import {
+  Measurement,
+  optimizeFunction,
+  setupCore,
+  teardownCore,
+} from "@codspeed/core";
 import { Benchmark, Suite } from "vitest";
 import { NodeBenchmarkRunner } from "vitest/runners";
 import { getBenchFn } from "vitest/suite";
 
 declare const __VERSION__: string;
+
+/**
+ * @deprecated
+ * TODO: try to use something like `updateTask` from `@vitest/runner` instead to use the output
+ * of vitest instead console.log but at the moment, `updateTask` is not exposed
+ */
+function logCodSpeed(message: string) {
+  console.log(`[CodSpeed] ${message}`);
+}
 
 async function runBenchmarkSuite(
   suite: Suite,
@@ -43,7 +57,7 @@ async function runBenchmarkSuite(
     const fn = getBenchFn(benchmark).bind(this);
 
     // run optimizations
-    await fn();
+    await optimizeFunction(fn);
 
     // run instrumented benchmark
     await (async function __codspeed_root_frame__() {
@@ -52,26 +66,19 @@ async function runBenchmarkSuite(
       Measurement.stopInstrumentation(uri);
     })();
 
-    // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
-    console.log(`[CodSpeed] ${uri} done`);
+    logCodSpeed(`${uri} done`);
   }
 }
 
 class CodSpeedRunner extends NodeBenchmarkRunner {
   async runSuite(suite: Suite): Promise<void> {
-    // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
-    console.log(
-      `[CodSpeed] running with @codspeed/vitest-runner v${__VERSION__}`
+    logCodSpeed(
+      `running ${suite.name} with @codspeed/vitest-runner v${__VERSION__}`
     );
-
-    // TODO move in module scope, or try to find a lifecycle that actually works with bench
     setupCore();
     await runBenchmarkSuite(suite, this);
-    // TODO move in module scope, or try to find a lifecycle that actually works with bench
     teardownCore();
-
-    // TODO: try to use something like `updateTask` instead to use the output of vitest instead console.log
-    console.log(`[CodSpeed] Done running benches.`);
+    logCodSpeed(`done running ${suite.name}`);
   }
 }
 
