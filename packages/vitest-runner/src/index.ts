@@ -71,15 +71,40 @@ async function runBenchmarkSuite(
 }
 
 class CodSpeedRunner extends NodeBenchmarkRunner {
-  async runSuite(suite: Suite): Promise<void> {
-    logCodSpeed(
-      `running ${suite.name} with @codspeed/vitest-runner v${__VERSION__}`
-    );
+  /**
+   * First thing that's getting called before actually collecting and running tests.
+   *
+   * Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   */
+  onBeforeCollect() {
+    logCodSpeed(`running with @codspeed/vitest-runner v${__VERSION__}`);
     setupCore();
+  }
+
+  async runSuite(suite: Suite): Promise<void> {
+    logCodSpeed(`running suite ${suite.name}`);
     await runBenchmarkSuite(suite, this);
-    teardownCore();
-    logCodSpeed(`done running ${suite.name}`);
+    logCodSpeed(`running suite ${suite.name} done`);
   }
 }
+
+// TODO: change this with a new lifecycle method that runs after all paths have been run for all files
+process.on("beforeExit", () => {
+  console.log("beforeExit");
+  teardownCore();
+  logCodSpeed(`done running`);
+});
+
+process.on("disconnect", () => {
+  console.log("disconnect");
+  teardownCore();
+  logCodSpeed(`done running`);
+});
+
+process.on("exit", () => {
+  console.log("exit");
+  teardownCore();
+  logCodSpeed(`done running`);
+});
 
 export default CodSpeedRunner;
