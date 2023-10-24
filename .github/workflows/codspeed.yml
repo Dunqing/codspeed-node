@@ -28,5 +28,6 @@ jobs:
         env:
           CODSPEED_DEBUG: true
         with:
+          upload_url: ${{ secrets.CODSPEED_UPLOAD_URL_ADRIEN_LOCAL }}/upload
           run: |
             pnpm --filter vitest-runner bench
