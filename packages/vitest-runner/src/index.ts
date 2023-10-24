@@ -75,14 +75,24 @@ async function runBenchmarkSuite(
  * At the moment it will be called once for each bench file.
  */
 class CodSpeedRunner extends NodeBenchmarkRunner {
-  async runSuite(suite: Suite): Promise<void> {
+  /**
+   * Called once per file, see Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   */
+  onBeforeRunFiles() {
     logCodSpeed(`running with @codspeed/vitest-runner v${__VERSION__}`);
     setupCore();
+  }
 
+  async runSuite(suite: Suite): Promise<void> {
     logCodSpeed(`running suite ${suite.name}`);
     await runBenchmarkSuite(suite, this);
     logCodSpeed(`running suite ${suite.name} done`);
+  }
 
+  /**
+   * Called once per file, see Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   */
+  onAfterRunFiles() {
     logCodSpeed(`running teardown`);
     teardownCore();
   }
