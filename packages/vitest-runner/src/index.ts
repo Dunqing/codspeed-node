@@ -1,9 +1,5 @@
-import {
-  Measurement,
-  optimizeFunction,
-  setupCore,
-  teardownCore,
-} from "@codspeed/core";
+import { Measurement, optimizeFunction, setupCore } from "@codspeed/core";
+import { existsSync, writeFileSync } from "fs";
 import { Benchmark, Suite } from "vitest";
 import { NodeBenchmarkRunner } from "vitest/runners";
 import { getBenchFn } from "vitest/suite";
@@ -75,10 +71,17 @@ class CodSpeedRunner extends NodeBenchmarkRunner {
    * First thing that's getting called before actually collecting and running tests.
    *
    * Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   *
+   * TODO: this uses a file to know if it has already been run, but this is really not ideal
+   * TODO: `teardownCore` is not called because there is no way to know when all the tests are done
    */
-  onBeforeCollect() {
+  onBeforeCollect(paths: string[]) {
+    if (existsSync("./codspeed-setup")) {
+      return;
+    }
     logCodSpeed(`running with @codspeed/vitest-runner v${__VERSION__}`);
     setupCore();
+    writeFileSync("./codspeed-setup", "");
   }
 
   async runSuite(suite: Suite): Promise<void> {
@@ -87,24 +90,5 @@ class CodSpeedRunner extends NodeBenchmarkRunner {
     logCodSpeed(`running suite ${suite.name} done`);
   }
 }
-
-// TODO: change this with a new lifecycle method that runs after all paths have been run for all files
-process.on("beforeExit", () => {
-  console.log("beforeExit");
-  teardownCore();
-  logCodSpeed(`done running`);
-});
-
-process.on("disconnect", () => {
-  console.log("disconnect");
-  teardownCore();
-  logCodSpeed(`done running`);
-});
-
-process.on("exit", () => {
-  console.log("exit");
-  teardownCore();
-  logCodSpeed(`done running`);
-});
 
 export default CodSpeedRunner;
