@@ -9,7 +9,7 @@ const LONG_BODY =
     )
     .join("\n") + "fixes #123";
 
-describe("parsePr", () => {
+describe("parsePr second", () => {
   bench("short body", () => {
     parsePr({ body: "fixes #123", title: "test", number: 124 });
   });
@@ -35,7 +35,7 @@ describe("parsePr", () => {
   });
 });
 
-describe("another parsePr", () => {
+describe("another parsePr second", () => {
   bench("short body", () => {
     parsePr({ body: "fixes #123", title: "test", number: 124 });
   });
