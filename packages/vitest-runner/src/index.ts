@@ -1,9 +1,5 @@
-import {
-  Measurement,
-  optimizeFunction,
-  setupCore,
-  teardownCore,
-} from "@codspeed/core";
+import { Measurement, optimizeFunction, setupCore } from "@codspeed/core";
+import { existsSync, writeFileSync } from "fs";
 import { Benchmark, Suite } from "vitest";
 import { NodeBenchmarkRunner } from "vitest/runners";
 import { getBenchFn } from "vitest/suite";
@@ -68,6 +64,8 @@ async function runBenchmarkSuite(
   }
 }
 
+const ALREADY_RUN_ONCE_FILE = "/tmp/codspeed-vitest-runner-already-run-once";
+
 /**
  * TODO: call `setupCore` and `teardownCore` only once for all suites and files.
  * At the moment it will be called once for each bench file.
@@ -75,24 +73,24 @@ async function runBenchmarkSuite(
 class CodSpeedRunner extends NodeBenchmarkRunner {
   /**
    * Called once per file, see Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   *
+   * TODO: this uses a file to know if it has already been run, but this is really not ideal
+   * TODO: `teardownCore` is not called because there is no way to know when all the tests are done
    */
   onBeforeRunFiles() {
-    logCodSpeed(`running with @codspeed/vitest-runner v${__VERSION__}`);
+    if (existsSync(ALREADY_RUN_ONCE_FILE)) {
+      logCodSpeed("setup - already run once, skipping");
+      return;
+    }
+    logCodSpeed(`setup - running with @codspeed/vitest-runner v${__VERSION__}`);
     setupCore();
+    writeFileSync(ALREADY_RUN_ONCE_FILE, "");
   }
 
   async runSuite(suite: Suite): Promise<void> {
     logCodSpeed(`running suite ${suite.name}`);
     await runBenchmarkSuite(suite, this);
     logCodSpeed(`running suite ${suite.name} done`);
-  }
-
-  /**
-   * Called once per file, see Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
-   */
-  onAfterRunFiles() {
-    logCodSpeed(`running teardown`);
-    teardownCore();
   }
 }
 
