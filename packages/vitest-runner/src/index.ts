@@ -1,4 +1,9 @@
-import { Measurement, optimizeFunction, setupCore } from "@codspeed/core";
+import {
+  Measurement,
+  optimizeFunction,
+  setupCore,
+  teardownCore,
+} from "@codspeed/core";
 import { existsSync, writeFileSync } from "fs";
 import { Benchmark, Suite } from "vitest";
 import { NodeBenchmarkRunner } from "vitest/runners";
@@ -91,6 +96,16 @@ class CodSpeedRunner extends NodeBenchmarkRunner {
     logCodSpeed(`running suite ${suite.name}`);
     await runBenchmarkSuite(suite, this);
     logCodSpeed(`running suite ${suite.name} done`);
+  }
+
+  /**
+   * Called once per file, see Called with a list containing a single file: https://github.com/vitest-dev/vitest/blob/114a993c002628385210034a6ed625195fcc04f3/packages/vitest/src/runtime/entry.ts#L46
+   *
+   * TODO: calling this will prevent having another benchmark file working, as it will stop the perf map generation
+   */
+  onAfterRunFiles() {
+    logCodSpeed(`running teardown`);
+    teardownCore();
   }
 }
 
