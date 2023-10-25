@@ -37,13 +37,11 @@ async function runBenchmarkSuite(
     ? parentSuiteName + "::" + suite.name
     : suite.name;
 
-  // run nested suites first
+  // run nested suites first, sequentially
   if (benchmarkSuiteGroup.length) {
-    await Promise.all(
-      benchmarkSuiteGroup.map((subSuite) =>
-        runBenchmarkSuite(subSuite, runner, currentSuiteName)
-      )
-    );
+    for (const subSuite of benchmarkSuiteGroup) {
+      await runBenchmarkSuite(subSuite, runner, currentSuiteName);
+    }
   }
 
   // return early if there are no benchmarks to run
