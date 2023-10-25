@@ -6,7 +6,7 @@ import { initOptimization } from "./optimization";
 
 declare const __VERSION__: string;
 
-// const linuxPerf = new native_core.LinuxPerf();
+const linuxPerf = new native_core.LinuxPerf();
 
 export const isBound = native_core.isBound;
 
@@ -15,11 +15,11 @@ export const setupCore = () => {
   native_core.Measurement.stopInstrumentation(
     `Metadata: codspeed-node ${__VERSION__}`
   );
-  // linuxPerf.start();
+  linuxPerf.start();
 };
 
 export const teardownCore = () => {
-  // linuxPerf.stop();
+  linuxPerf.stop();
 };
 
 export { optimizeFunction, optimizeFunctionSync } from "./optimization";
